@@ -40,6 +40,20 @@ function Featurebase_config() {
                 "Description" => "Choose the widget theme mode (light, or dark)",
                 "Default" => "dark",
             ),
+            "FeaturebaseLiveChat-identity_verification" => array(
+                "FriendlyName" => "Enforce Identity Verification",
+                "Type" => "yesno",
+                "Size" => "55",
+                "Description" => "Enforce identity verification to prevent third parties from impersonating logged-in users. This is optional and only required if 'Enforce Identity' is enabled in Featurebase.",
+                "Default" => "",
+            ),
+            "FeaturebaseLiveChat-identity_verification_secret" => array(
+                "FriendlyName" => "Identity Verification Secret",
+                "Type" => "password",
+                "Size" => "99",
+                "Description" => "Identity Secret used to authenticate requests for logged-in users. This is optional and only required if 'Enforce Identity' is enabled in Featurebase.",
+                "Default" => "",
+            ),
             "FeaturebaseLiveChat-datasync" => array(
                 "FriendlyName" => "Enable Data Sync",
                 "Type" => "yesno",
