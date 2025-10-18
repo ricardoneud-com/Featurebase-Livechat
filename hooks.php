@@ -2,6 +2,7 @@
 
 use WHMCS\Database\Capsule;
 use WHMCS\Session;
+use Firebase\JWT\JWT;
 
 $enabled = Capsule::table('tbladdonmodules')
     ->where('module', 'Featurebase')
@@ -29,16 +30,22 @@ add_hook('ClientAreaFooterOutput', -1, function () {
         ->where('setting', 'FeaturebaseLiveChat-theme')
         ->value('value') ?? 'dark';
 
-    $organization = Capsule::table('tbladdonmodules')
-        ->where('module', 'Featurebase')
-        ->where('setting', 'FeaturebaseLiveChat-organization')
-        ->value('value');
-
     $dataSync = Capsule::table('tbladdonmodules')
         ->where('module', 'Featurebase')
         ->where('setting', 'FeaturebaseLiveChat-datasync')
         ->where('value', 'on')
         ->count();
+
+    $identityEnabled = Capsule::table('tbladdonmodules')
+        ->where('module', 'Featurebase')
+        ->where('setting', 'FeaturebaseLiveChat-identity_verification')
+        ->where('value', 'on')
+        ->count();
+
+    $identitySecret = Capsule::table('tbladdonmodules')
+        ->where('module', 'Featurebase')
+        ->where('setting', 'FeaturebaseLiveChat-identity_verification_secret')
+        ->value('value');
 
     if (empty($token)) {
         return;
@@ -50,12 +57,22 @@ add_hook('ClientAreaFooterOutput', -1, function () {
         "language" => $language
     ];
 
-    if (!empty($dataSync) && Session::get("uid") && !empty($organization)) {
+    if (!empty($dataSync) && Session::get("uid")) {
         $user = Capsule::table('tblclients')->where('id', Session::get("uid"))->first();
         if ($user) {
             $baseConfig["userId"] = (string)$user->id;
             $baseConfig["name"] = addslashes($user->firstname);
             $baseConfig["email"] = addslashes($user->email);
+
+            if (!empty($identityEnabled) && !empty($identitySecret)) {
+                $payload = [
+                    "name" => $user->firstname,
+                    "email" => $user->email,
+                    "userId" => (string)$user->id
+                ];
+                $jwt = JWT::encode($payload, $identitySecret, 'HS256');
+                $baseConfig["featurebaseJwt"] = $jwt;
+            }
         }
     }
 
