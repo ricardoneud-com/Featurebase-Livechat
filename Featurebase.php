@@ -9,7 +9,7 @@ function Featurebase_config() {
     return array(
         "name" => "Featurebase",
         "description" => "The next-gen support & feedback platform",
-        "version" => "1.0",
+        "version" => "1.1",
         "author" => '<a href="' . $authorLink . '" style="text-decoration: none; display: inline-flex; align-items: center;">Ricardoneud.com</a>',
         "fields" => array(
             "FeaturebaseLiveChat-enable" => array(
