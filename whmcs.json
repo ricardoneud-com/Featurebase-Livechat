@@ -1,0 +1,36 @@
+{
+  "schema": "1.0",
+  "type": "whmcs-addons",
+  "name": "featurebaselivechat",
+  "version": "1.1",
+  "category": "productivity",
+  "description": {
+    "name": "Featurebase Livechat",
+    "tagline": "Easily integrate Featurebase Live Chat into your WHMCS installation with this lightweight and user-friendly addon.",
+    "long": "The Featurebase Live Chat Addon seamlessly integrates with WHMCS, providing a secure and intelligent live chat experience for your customers. It allows for customer support, user tracking, and optional identity verification, with real-time data synchronization between WHMCS and Featurebase.",
+    "features": [
+      "Easily add the Featurebase Live Chat widget to the WHMCS client area.",
+      "Loads asynchronously to avoid slowing down your pages.",
+      "Automatically identifies logged-in customers in Featurebase.",
+      "Optional Identity Verification to prevent third parties from impersonating users.",
+      "Supports Featurebase user hash for secure identification.",
+      "Identity is always executed to keep user data up-to-date.",
+      "Syncs WHMCS customer data with Featurebase when the user is logged in and DataSync is enabled.",
+      "If DataSync is disabled or the user is no longer logged into WHMCS, the Featurebase session is automatically cleared (Identity) to prevent stale sessions.",
+      "Enable or disable live chat.",
+      "Configure identity verification, identity secret, and data synchronization directly in WHMCS/Featurebase."
+    ]
+  },
+  "logo": {
+    "filename": "logo.jpg"
+  },
+  "support": {
+    "support_url": "https:\/\/ricardoneud.com\/contact"
+  },
+  "authors": [
+    {
+      "name": "Ricardoneud.com",
+      "homepage": "https:\/\/ricardoneud.com\/"
+    }
+  ]
+}
